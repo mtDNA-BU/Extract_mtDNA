@@ -1,4 +1,3 @@
-#### VCF file I use ####
 library(data.table)
 library(vcfR)
 library(dplyr)
