@@ -25,9 +25,9 @@ aaf[coverage<250 & is.na(coverage)==F] <- NA
 
 
 
-# not reliable loci (NUMT) --> remove
+# remove not reliable loci (e.g. NUMTs)
 loci_NUMT <- c(1:61,301,302,310,316,499,567,3107,16088:16569)
-aaf <- aaf[-loci_NUMT, ] # 16569 --> 16019, 7210 samples
+aaf <- aaf[-loci_NUMT, ] # 16569 --> 16019
 coverage <- coverage[-loci_NUMT, ]
 freq <- freq[-loci_NUMT, ]
 allele <- allele[-loci_NUMT, ]
@@ -101,7 +101,7 @@ for (i in seq_along(sit_loop_check)) { #row (pos)
 
 
 
-## heteroplasmic burden
+## heteroplasmic burden scores
 weight_heter <- colSums(aaf_cat1, na.rm = T)  #sum entries in each column separately, remove missing val
 weight_heter <- as.data.frame(weight_heter)
 weight_heter$NWD <- rownames(weight_heter)
@@ -120,5 +120,5 @@ write.csv(hetero_burden, file = "het_score.csv", row.names = F)
 
 
 #### SAMPLE REMOVAL ####
-# I haven't included sample removal here. after getting het_score.csv, we can remove samples with mtDNA CN < 40; contamination level > 3%; raw_heter > 5;
+# I haven't included sample removal here. After getting het_score.csv, we can remove samples with mtDNA CN < 40; contamination level > 3%; raw_heter > 5;
 
