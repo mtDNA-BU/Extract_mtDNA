@@ -5,7 +5,7 @@ library(dplyr)
 id <- read.csv("nwdid.csv")
 dat_vcf <- fread("mutect2.mutect2.05.merge.vcf.gz")
 
-## extract FHS samples
+## extract samples
 col_id <- c(colnames(dat_vcf)[1:9], colnames(dat_vcf)[colnames(dat_vcf) %in% id$NWD_ID])
 dat <- dat_vcf %>% select(all_of(col_id))
 
@@ -20,7 +20,7 @@ dat <- dat[nchar(dat$ALT) == nchar(dat$REF),] #23323 --> 20912
 # remove POS with reference allele = alternative allele
 dat <- dat[dat$REF != dat$ALT,] #20912 --> 16334
 
-# only maintain same reference allele as the ref dataset
+# only maintain same reference allele as the reference sequence
 dat2 <- data.frame(matrix(ncol = ncol(dat), nrow = 0))
 colnames(dat2) <- colnames(dat)
 for (i in unique(dat$POS)){
