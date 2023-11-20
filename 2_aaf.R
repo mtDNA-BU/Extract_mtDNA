@@ -24,7 +24,6 @@ system.time({
     
     complex.allele <- grep("/", m.allele) #return row numbers for rows containing "/"
     AAF <- array(NA, 16569) #16569: number of genes
-    # Xianbang: I added a if statement here since complex.allele may have length of 0, it is very rare in practice, but is possible theoretically
     if(length(complex.allele)==0){
       AAF <- ifelse(m.allele == ref2, 0, 1)
     }else{
@@ -40,9 +39,7 @@ system.time({
     AAF.m[,m]<-AAF
   }
   
-  # Katia: do we really need this?
   colnames(AAF.m) <- subjectID
-  # Xianbang: we can assign the ID to the colnames of PAA matrix
   
 })
 
